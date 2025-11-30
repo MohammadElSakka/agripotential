@@ -1,0 +1,21 @@
+[build-system]
+requires = [
+    "setuptools>=80.9.0", 
+    "wheel>=0.45.1",
+    "setuptools_scm[toml]>=8.0"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["agripotential"]
+
+[project]
+name = "agripotential"
+authors = [{name = "Mohammad El Sakka", email = "mohammad.el-sakka@outlook.com"}]
+description = "A library that provides utility functions to work with the agripotential dataset."
+version = "0.1.0"
+requires-python = "==3.9.2"
+dependencies = [
+    "pandas==2.3.3",
+    "rasterio==1.4.3",
+]

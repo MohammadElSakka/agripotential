@@ -14,7 +14,7 @@ def download_file(src_url: str, dest_path: str):
                     f.write(chunk)
 
 
-def download_dataset(dest_dir: str):
+def download_dataset(dest_dir: str, download_images: bool = True):
     # inside dest_dir, create a agripotential directory
     data_dir = os.path.join(dest_dir, "agripotential")
 
@@ -61,24 +61,27 @@ def download_dataset(dest_dir: str):
             return False
 
     #### Satellite images
-    metadata_path = f"{data_dir}/metadata.csv"
-    df_metadata = pd.read_csv(metadata_path)
-
-    print("Downloading satellite images...", flush=True)
-    for idx, df_row in df_metadata.iterrows():
-        filename = df_row["filename"]
-        file_url = ROOT_URL + filename
+    if download_images:
         print(
-            f"[{idx+1}/{len(df_metadata)}] Downloading {file_url} ...",
-            end=" ",
+            "Parameter 'download_images' is True so downloading satellite images (might take a while).",
             flush=True,
         )
-        dest_path = os.path.join(dest_dir, "agripotential", filename)
-        try:
-            download_file(src_url=file_url, dest_path=dest_path)
-            print(f"Done.", flush=True)
-        except Exception as e:
-            print(f"\nFailed to download {file_url}: {e}", flush=True)
-            return False
+        metadata_path = f"{data_dir}/metadata.csv"
+        df_metadata = pd.read_csv(metadata_path)
+        for idx, df_row in df_metadata.iterrows():
+            filename = df_row["filename"]
+            file_url = ROOT_URL + filename
+            print(
+                f"[{idx+1}/{len(df_metadata)}] Downloading {file_url} ...",
+                end=" ",
+                flush=True,
+            )
+            dest_path = os.path.join(dest_dir, "agripotential", filename)
+            try:
+                download_file(src_url=file_url, dest_path=dest_path)
+                print(f"Done.", flush=True)
+            except Exception as e:
+                print(f"\nFailed to download {file_url}: {e}", flush=True)
+                return False
 
     return True

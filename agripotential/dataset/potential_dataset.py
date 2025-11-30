@@ -1,14 +1,15 @@
-import os
 import numpy as np
+import os
 import pandas as pd
 import rasterio
 from rasterio.windows import Window
+from torch.utils.data import Dataset  # type: ignore
 from typing import Tuple, Optional, Literal
 
 from .urls import ROOT_URL
 
 
-class PotentialDataset:
+class PotentialDataset(Dataset):
     def __init__(
         self,
         label_name: Literal["viticulture", "market", "field"],

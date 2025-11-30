@@ -21,7 +21,7 @@ class PotentialDataset:
             self.data_path = ROOT_URL
 
         self.metadata_path = os.path.join(self.data_path, "metadata.csv")
-        self.patch_csv_path = os.path.join(data_path, f"{mode}.csv")
+        self.patch_csv_path = os.path.join(self.data_path, f"{mode}.csv")
         self.label_path = os.path.join(self.data_path, f"{label_name}.tif")
 
         self.sentinel2_paths: list[str] = []

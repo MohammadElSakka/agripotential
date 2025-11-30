@@ -14,11 +14,17 @@ def download_dataset(dest_dir: str):
         filename = df_row["filename"]
         file_url = ROOT_URL + filename
         # download this file in dest_dir/agripotential
-        print(f"[{idx+1}/{len(df_metadata)}]Downloading {file_url} ...", flush=True)
+        print(f"[{idx+1}/{len(df_metadata)}] Downloading {file_url} ...", flush=True)
+        dest_path = os.path.join(dest_dir, "agripotential", filename)
         try:
-            response = requests.get(file_url)
-            with open(os.path.join(dest_dir, "agripotential", filename, "wb")) as f:
-                f.write(response.content)
+            with requests.get(file_url, stream=True) as response:
+                response.raise_for_status()  # Raise exception for HTTP errors
+                with open(dest_path, "wb") as f:
+                    for chunk in response.iter_content(
+                        chunk_size=1024 * 1024
+                    ):  # 1 MB chunks
+                        if chunk:
+                            f.write(chunk)
             print(f"Downloaded {file_url} successfully.", flush=True)
         except Exception as e:
             print(f"Failed to download {file_url}: {e}", flush=True)

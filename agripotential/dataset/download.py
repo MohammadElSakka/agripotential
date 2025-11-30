@@ -30,13 +30,14 @@ def download_dataset(dest_dir: str):
     print("Downloading csv files...", flush=True)
     for idx, csv_file in enumerate(csv_files):
         file_url = ROOT_URL + csv_file
+        dest_path = os.path.join(data_dir, csv_file)
         try:
             print(
                 f"[{idx}/{len(csv_files)}] Downloading {file_url}...",
                 end=" ",
                 flush=True,
             )
-            download_file(src_url=file_url, dest_path=data_dir)
+            download_file(src_url=file_url, dest_path=dest_path)
             print(f"Done.", flush=True)
         except Exception as e:
             print(f"\nFailed to download {file_url}: {e}", flush=True)
@@ -46,13 +47,14 @@ def download_dataset(dest_dir: str):
     print("Downloading label files...", flush=True)
     for idx, label_file in enumerate(label_files):
         file_url = ROOT_URL + label_file
+        dest_path = os.path.join(data_dir, label_file)
         try:
             print(
                 f"[{idx}/{len(label_files)}] Downloading {file_url}...",
                 end=" ",
                 flush=True,
             )
-            download_file(src_url=file_url, dest_path=data_dir)
+            download_file(src_url=file_url, dest_path=dest_path)
             print(f"Done.", flush=True)
         except Exception as e:
             print(f"\nFailed to download {file_url}: {e}", flush=True)

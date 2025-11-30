@@ -33,7 +33,7 @@ def download_dataset(dest_dir: str):
         dest_path = os.path.join(data_dir, csv_file)
         try:
             print(
-                f"[{idx}/{len(csv_files)}] Downloading {file_url}...",
+                f"[{idx+1}/{len(csv_files)}] Downloading {file_url}...",
                 end=" ",
                 flush=True,
             )
@@ -50,7 +50,7 @@ def download_dataset(dest_dir: str):
         dest_path = os.path.join(data_dir, label_file)
         try:
             print(
-                f"[{idx}/{len(label_files)}] Downloading {file_url}...",
+                f"[{idx+1}/{len(label_files)}] Downloading {file_url}...",
                 end=" ",
                 flush=True,
             )

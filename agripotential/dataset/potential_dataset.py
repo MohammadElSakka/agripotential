@@ -17,14 +17,12 @@ class PotentialDataset:
     ):
         if data_path:
             self.data_path = data_path
-            self.metadata_path = os.path.expanduser(f"{self.data_path}/metadata.csv")
-            self.patch_csv_path = os.path.expanduser(f"{data_path}/{mode}.csv")
-            self.label_path = f"{self.data_path}/{label_name}.tif"
         else:
             self.data_path = ROOT_URL
-            self.metadata_path = ROOT_URL + "metadata.csv"
-            self.patch_csv_path = ROOT_URL + mode + ".csv"
-            self.label_path = ROOT_URL + label_name + ".tif"
+
+        self.metadata_path = os.path.join(self.data_path, "metadata.csv")
+        self.patch_csv_path = os.path.join(data_path, f"{mode}.csv")
+        self.label_path = os.path.join(self.data_path, f"{label_name}.tif")
 
         self.sentinel2_paths: list[str] = []
         self.patches: pd.DataFrame = pd.DataFrame()

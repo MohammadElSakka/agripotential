@@ -6,7 +6,7 @@ ROOT_URL = "https://huggingface.co/datasets/m-sakka/agripotential/resolve/main/"
 METADATA_URL = ROOT_URL + "metadata.csv"
 
 
-def download(dest_dir: str):
+def download_dataset(dest_dir: str):
     # inside dest_dir, create a agripotential directory
     os.makedirs(os.path.join(dest_dir, "agripotential"), exist_ok=True)
     df_metadata = pd.read_csv(METADATA_URL)

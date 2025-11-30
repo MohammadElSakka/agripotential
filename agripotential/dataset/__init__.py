@@ -1,3 +1,3 @@
-from . import download
+from download import download_dataset
 
-__all__ = ["download"]
+__all__ = ["download_dataset"]

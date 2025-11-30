@@ -26,7 +26,6 @@ class PotentialDataset:
             self.patch_csv_path = ROOT_URL + mode + ".csv"
             self.label_path = ROOT_URL + label_name + ".tif"
 
-        ############# here
         self.sentinel2_paths: list[str] = []
         self.patches: pd.DataFrame = pd.DataFrame()
         self._setup()
@@ -36,13 +35,13 @@ class PotentialDataset:
         self.sentinel2_paths = [
             f"{self.data_path}/{f}" for f in metadata_df["filename"]
         ]
-        self.patch_locations = pd.read_csv(self.patch_location_path)
+        self.patch_locations = pd.read_csv(self.patch_csv_path)
 
     def __len__(self) -> int:
         return len(self.patch_locations)
 
     def __getitem__(self, idx) -> Tuple[np.ndarray, np.ndarray]:
-        patch_meta = self.patch_locations.iloc[idx]
+        patch_meta = self.patch_csv_path.iloc[idx]
         row, col, patch_size = (
             patch_meta["row"],
             patch_meta["col"],
@@ -55,7 +54,7 @@ class PotentialDataset:
             with rasterio.open(fp) as src:
                 data[i] = src.read(window=window)
 
-        with rasterio.open(self.labels_map_path) as src:
-            label = src.read(window=window)[0].astype(np.int64)
+        with rasterio.open(self.label_path) as src:
+            label = src.read(window=window)[0].astype(np.uint8)
 
         return data, label

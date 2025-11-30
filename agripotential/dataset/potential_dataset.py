@@ -35,13 +35,13 @@ class PotentialDataset:
         self.sentinel2_paths = [
             f"{self.data_path}/{f}" for f in metadata_df["filename"]
         ]
-        self.patch_locations = pd.read_csv(self.patch_csv_path)
+        self.patches = pd.read_csv(self.patch_csv_path)
 
     def __len__(self) -> int:
         return len(self.patch_locations)
 
     def __getitem__(self, idx) -> Tuple[np.ndarray, np.ndarray]:
-        patch_meta = self.patch_csv_path.iloc[idx]
+        patch_meta = self.patches.iloc[idx]
         row, col, patch_size = (
             patch_meta["row"],
             patch_meta["col"],

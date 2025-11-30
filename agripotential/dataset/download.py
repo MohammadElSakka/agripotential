@@ -25,8 +25,6 @@ def download_dataset(dest_dir: str):
     # images (.tif): info in metadata.csv
     csv_files = ["train.csv", "val.csv", "metadata.csv"]
     label_files = ["viticulture.tif", "market.tif", "field.tif"]
-    metadata_path = f"{data_dir}/metadta.csv"
-    df_metadata = pd.read_csv(metadata_path)
 
     #### csv
     print("Downloading csv files...", flush=True)
@@ -61,6 +59,9 @@ def download_dataset(dest_dir: str):
             return False
 
     #### Satellite images
+    metadata_path = f"{data_dir}/metadata.csv"
+    df_metadata = pd.read_csv(metadata_path)
+
     print("Downloading satellite images...", flush=True)
     for idx, df_row in df_metadata.iterrows():
         filename = df_row["filename"]

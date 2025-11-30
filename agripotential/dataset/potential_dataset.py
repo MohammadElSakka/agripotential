@@ -5,7 +5,7 @@ import rasterio
 from rasterio.windows import Window
 from typing import Tuple, Optional, Literal
 
-from . import ROOT_URL
+from .urls import ROOT_URL
 
 
 class PotentialDataset:

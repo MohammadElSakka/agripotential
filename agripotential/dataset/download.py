@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import os
 
-from . import ROOT_URL
+from .urls import ROOT_URL
 
 
 def download_file(src_url: str, dest_path: str):

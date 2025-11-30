@@ -36,7 +36,7 @@ class PotentialDataset:
         self.patches = pd.read_csv(self.patch_csv_path)
 
     def __len__(self) -> int:
-        return len(self.patch_locations)
+        return len(self.patches)
 
     def __getitem__(self, idx) -> Tuple[np.ndarray, np.ndarray]:
         patch_meta = self.patches.iloc[idx]

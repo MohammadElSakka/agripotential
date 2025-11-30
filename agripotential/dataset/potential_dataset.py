@@ -31,7 +31,7 @@ class PotentialDataset:
     def _setup(self):
         metadata_df = pd.read_csv(self.metadata_path)
         self.sentinel2_paths = [
-            f"{self.data_path}/{f}" for f in metadata_df["filename"]
+            os.path.join(self.data_path, f) for f in metadata_df["filename"]
         ]
         self.patches = pd.read_csv(self.patch_csv_path)
 

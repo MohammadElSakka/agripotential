@@ -12,7 +12,7 @@ class PotentialDataset:
     def __init__(
         self,
         label_name: Literal["viticulture", "market", "field"],
-        mode: Literal["train", "val"],
+        mode: Literal["train", "val", "test"],
         data_path: Optional[str] = None,
     ):
         if data_path:

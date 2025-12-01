@@ -38,12 +38,13 @@ class PotentialDataset:
     def __len__(self) -> int:
         return len(self.patches)
 
-    def __getitem__(self, idx) -> Tuple[np.ndarray, np.ndarray]:
+    def __getitem__(self, idx) -> Tuple[np.ndarray, np.ndarray, str]:
         patch_meta = self.patches.iloc[idx]
-        row, col, patch_size = (
+        row, col, patch_size, patch_id = (
             patch_meta["row"],
             patch_meta["col"],
             patch_meta["patch_size"],
+            patch_meta["patch_id"],
         )
         window = Window(col, row, patch_size, patch_size)
 
@@ -55,4 +56,4 @@ class PotentialDataset:
         with rasterio.open(self.label_path) as src:
             label = src.read(window=window)[0].astype(np.uint8)
 
-        return data, label
+        return data, label, patch_id

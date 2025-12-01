@@ -16,6 +16,7 @@ class PotentialDataset(Dataset):
         mode: Literal["train", "val"],
         data_path: Optional[str] = None,
     ):
+        super().__init__()
         if data_path:
             self.data_path = data_path
         else:

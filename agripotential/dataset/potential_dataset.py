@@ -3,20 +3,18 @@ import os
 import pandas as pd
 import rasterio
 from rasterio.windows import Window
-from torch.utils.data import Dataset  # type: ignore
 from typing import Tuple, Optional, Literal
 
 from .urls import ROOT_URL
 
 
-class PotentialDataset(Dataset):
+class PotentialDataset:
     def __init__(
         self,
         label_name: Literal["viticulture", "market", "field"],
         mode: Literal["train", "val"],
         data_path: Optional[str] = None,
     ):
-        super().__init__()
         if data_path:
             self.data_path = data_path
         else:

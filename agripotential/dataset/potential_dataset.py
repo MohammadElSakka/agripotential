@@ -38,6 +38,10 @@ class PotentialDataset:
     def __len__(self) -> int:
         return len(self.patches)
 
+    def __iter__(self):
+        for i in range(len(self)):
+            yield self[i]
+
     def __getitem__(self, idx) -> Tuple[np.ndarray, np.ndarray, str]:
         patch_meta = self.patches.iloc[idx]
         row, col, patch_size, patch_id = (

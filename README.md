@@ -7,6 +7,9 @@ Please refer to the tutorial below for more instructions and information.
 ## Tutorial 
 https://colab.research.google.com/drive/1Ys_z7qBY1pa8iY7PMaLzDsTuiFaJDhHu
 
+## Competition link
+https://www.codabench.org/competitions/12055/
+
 ## Citation
 If you find this work helpful please cite the following:
 ```
